@@ -45,7 +45,9 @@ const Table = async ({
                   {i + 1 + LIMIT * (page - 1)}
                 </th>
                 <td className="px-6 py-4 ">{`${el.firstname} ${el.lastname}`}</td>
-                <td className="px-6 py-4">{formatSalary(el.salary)}</td>
+                <td className="px-6 py-4">
+                  {formatSalary(el.salary, el.devise)}
+                </td>
                 <td className="px-6 py-4">{el.goal}</td>
                 <td className="px-6 py-4 flex gap-4 items-center">
                   <div className="font-medium   hover:text-blue-600 cursor-pointer">

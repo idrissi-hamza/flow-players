@@ -1,9 +1,9 @@
-export const formatSalary = (salary: number): string => {
+export const formatSalary = (salary: number, devise: string): string => {
   if (salary >= 1000000) {
-    return (salary / 1000000).toFixed(1) + 'M$';
+    return (salary / 1000000).toFixed(0) + 'M' + devise;
   } else if (salary >= 1000) {
-    return (salary / 1000).toFixed(1) + 'k$';
+    return (salary / 1000).toFixed(0) + 'k' + devise;
   } else {
-    return salary + '$';
+    return salary.toString() + devise;
   }
 };

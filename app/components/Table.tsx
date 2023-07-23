@@ -1,3 +1,4 @@
+import { formatSalary } from '@/lib/formatSalary';
 import { PlayerType } from '@/lib/playerSchema';
 import React from 'react';
 import { BsFillPencilFill, BsTrash } from 'react-icons/bs';
@@ -36,7 +37,7 @@ const Table = async ({ players }: { players: PlayerType[] }) => {
                   {i + 1}
                 </th>
                 <td className="px-6 py-4 ">{`${el.firstname} ${el.lastname}`}</td>
-                <td className="px-6 py-4">{el.salary}</td>
+                <td className="px-6 py-4">{formatSalary(el.salary)}</td>
                 <td className="px-6 py-4">{el.goal}</td>
                 <td className="px-6 py-4 flex gap-4 items-center">
                   <div className="font-medium   hover:text-blue-600 cursor-pointer">

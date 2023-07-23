@@ -17,10 +17,23 @@ export const POST = async (req: Request, res: NextResponse) => {
 
 // GET endpoint
 export const GET = async (req: NextRequest, res: NextResponse) => {
-  try {
-    const players = await prisma.player.findMany();
+  const url = new URL(req.url || '');
+  const page = url.searchParams.get('page');
+  const limit = url.searchParams.get('limit');
 
-    return NextResponse.json(players, { status: 200 });
+  // Check if skip and take are provided and parse them to integers
+  const parsedPage = parseInt(page || '', 10) || 0;
+  const take = parseInt(limit || '', 10) || 10;
+  const skip = (parsedPage - 1) * take;
+  
+  try {
+    const players = await prisma.player.findMany({
+      skip,
+      take,
+    });
+   
+    
+    return NextResponse.json({players,skip,take}, { status: 200 });
   } catch (err) {
     return NextResponse.json({ message: 'Error', err }, { status: 500 });
   }

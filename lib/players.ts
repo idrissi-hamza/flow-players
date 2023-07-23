@@ -1,13 +1,22 @@
-import { BASE_URL } from '@/utils/constants';
+import { BASE_URL } from '@/lib/constants';
 import { PlayerType } from './playerSchema';
 import prisma from './prisma';
 
-export const getPlayers = async () => {
-  const res = await fetch(`${BASE_URL}/api/players?page=1&take=2`, {
-    next: {
-      revalidate: 0,
-    },
-  });
+export const getPlayers = async ({
+  page ,
+  limit ,
+}: {
+  page: number;
+  limit: number;
+}) => {
+  const res = await fetch(
+    `${BASE_URL}/api/players?page=${page}&limit=${limit}`,
+    {
+      next: {
+        revalidate: 10,
+      },
+    }
+  );
   const data = await res.json();
   return data;
 };
@@ -32,5 +41,3 @@ export const postPlayer = async (data: PlayerType) => {
     throw new Error('Error posting blog: ' + error.message);
   }
 };
-
-

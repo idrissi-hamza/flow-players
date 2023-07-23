@@ -25,15 +25,17 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
   const parsedPage = parseInt(page || '', 10) || 0;
   const take = parseInt(limit || '', 10) || 10;
   const skip = (parsedPage - 1) * take;
-  
+
   try {
     const players = await prisma.player.findMany({
       skip,
       take,
+      orderBy: {
+        updatedAt: 'desc',
+      },
     });
-   
-    
-    return NextResponse.json({players,skip,take}, { status: 200 });
+
+    return NextResponse.json({ players, skip, take }, { status: 200 });
   } catch (err) {
     return NextResponse.json({ message: 'Error', err }, { status: 500 });
   }

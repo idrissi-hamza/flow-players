@@ -1,11 +1,18 @@
+import { LIMIT } from '@/lib/constants';
 import { formatSalary } from '@/lib/formatSalary';
 import { PlayerType } from '@/lib/playerSchema';
 import React from 'react';
 import { BsFillPencilFill, BsTrash } from 'react-icons/bs';
 import { HiOutlineDocumentDuplicate } from 'react-icons/hi';
 
-const Table = async ({ players }: { players: PlayerType[] }) => {
-  const headers = ['ID', 'NOM COMPLET', 'SALAIRE ANNUEL', 'BUT', 'ACTIONS'];
+const Table = async ({
+  players,
+  page,
+}: {
+  players: PlayerType[];
+  page: number;
+}) => {
+  const headers = ['Num', 'NOM COMPLET', 'SALAIRE ANNUEL', 'BUT', 'ACTIONS'];
   return (
     <div className="min-h-[70vh]">
       <div className="shadow-md sm:rounded-lg mt-10 max-w-2xl mx-auto ">
@@ -34,7 +41,8 @@ const Table = async ({ players }: { players: PlayerType[] }) => {
                   scope="row"
                   className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
                 >
-                  {i + 1}
+                  {/* this code so we get always the order of the the elements of the table instead of the id that can be random */}
+                  {i + 1 + LIMIT * (page - 1)}
                 </th>
                 <td className="px-6 py-4 ">{`${el.firstname} ${el.lastname}`}</td>
                 <td className="px-6 py-4">{formatSalary(el.salary)}</td>

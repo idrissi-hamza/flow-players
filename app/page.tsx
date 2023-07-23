@@ -25,7 +25,10 @@ export default async function Home({
       <Header />
       <div className="flex flex-col justify-center items-center gap-4">
         <Suspense fallback={<div>...loading</div>}>
-          <Table players={players} />
+          <Table
+            players={players}
+            page={page}
+          />
         </Suspense>
         <Pagination
           page={page}

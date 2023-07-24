@@ -7,6 +7,7 @@ import { BsFillPencilFill, BsTrash } from 'react-icons/bs';
 import { HiOutlineDocumentDuplicate } from 'react-icons/hi';
 import DeletePlayerButton from './Delete';
 import { Toaster } from 'react-hot-toast';
+import CopyToClipboard from './CopyToClipboard';
 
 const Table = async ({
   players,
@@ -64,9 +65,7 @@ const Table = async ({
                       <BsFillPencilFill />
                     </Link>
                     {/* copy */}
-                    <button className="font-medium   hover:text-blue-600 cursor-pointer">
-                      <HiOutlineDocumentDuplicate />
-                    </button>
+                    <CopyToClipboard player={player} />
                     {/* delete */}
 
                     <DeletePlayerButton id={player.id} />

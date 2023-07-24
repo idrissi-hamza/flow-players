@@ -1,19 +1,25 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const validationSchema = z.object({
-  firstname: z.string().nonempty("First name is required"),
-  lastname: z.string().nonempty("Last name is required"),
+  firstname: z.string().nonempty('First name is required'),
+  lastname: z.string().nonempty('Last name is required'),
   goal: z
-    .string() // Accept the number as a string from the form
-    .refine((value) => Number.isInteger(parseFloat(value)), { message: "Goal must be an integer" }) // Check if it's an integer
-    .refine((value) => parseInt(value, 10) >= 0, { message: "Goal must be a positive number" }) // Check if it's positive
-    .transform((value) => parseInt(value, 10)), // Transform the string to an integer
+    .string()
+    .transform((value) => (value === '' ? undefined : parseInt(value, 10)))
+    .refine((value) => value === undefined || Number.isInteger(value), {
+      message: 'Goal must be an integer',
+    })
+    .refine((value) => value === undefined || value >= 0, {
+      message: 'Goal must be a positive number',
+    })
+    .optional(),
   salary: z
-    .string() // Accept the number as a string from the form
-    .transform((value) => parseFloat(value)), // Transform the string to a float
-  devise: z.enum(["€", "MAD","£","$","Fr"]).default("$"),
+    .string()
+    .transform((value) => (value === '' ? undefined : parseFloat(value)))
+    .optional(),
+  devise: z.enum(['€', 'MAD', '£', '$', 'Fr']).default('$'),
   pictureURL: z.string().url().optional(),
 });
 
-
-export   type PlayerType = z.infer<typeof validationSchema>;
+export type PlayerType = z.infer<typeof validationSchema>;
+export type PlayerTypeWithId = { id: string } & PlayerType;

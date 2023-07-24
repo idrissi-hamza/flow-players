@@ -9,7 +9,7 @@ export default function RootLayout({
     <div>
       {' '}
       <header className="border-b  w-full ">
-        <div className="   w-full p-4 mx-auto flex justify-between items-center ">
+        <div className="   w-full py-4 mx-auto flex justify-between items-center max-w-2xl ">
           <div className="font-bold">
             <Link href={'/'}>List des joueurs</Link>
           </div>

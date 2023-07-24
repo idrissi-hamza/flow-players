@@ -54,7 +54,6 @@ const EditForm = ({ player }: { player: PlayerTypeWithId }) => {
 
   return (
     <>
-      <pre>{JSON.stringify(player, null, 2)}</pre>
       <Toaster />
       <form
         className="px-8 pt-6 pb-4 mb-4 mt-6 border border-slate-400 rounded-md flex"

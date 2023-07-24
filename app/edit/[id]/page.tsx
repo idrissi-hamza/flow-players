@@ -16,7 +16,7 @@ const EditPage = async ({ params }: { params: { id: string } }) => {
       </Link>
       <EditForm player={player} />
       
-       Edit
+   
     </div>
   );
 };

@@ -18,7 +18,6 @@ export default async function Home({
     typeof searchParams.limit === 'string' ? Number(searchParams.limit) : LIMIT;
 
   const { players } = await getPlayers({ page, limit });
-  const total = await players.length;
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -30,12 +29,13 @@ export default async function Home({
             page={page}
           />
         </Suspense>
-        <Pagination
-          page={page}
-          total={total}
-        />
+        <Suspense fallback={<div>...loading</div>}>
+          <Pagination
+            page={page}
+            total={players.length}
+          />
+        </Suspense>
       </div>
-      
     </div>
   );
 }

@@ -20,9 +20,9 @@ export default async function Home({
   const { players } = await getPlayers({ page, limit });
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen ">
       <Header />
-      <div className="flex flex-col justify-center items-center gap-4">
+      <div className="flex flex-col justify-center items-center gap-4 ">
         <Suspense fallback={<div>...loading</div>}>
           <Table
             players={players}

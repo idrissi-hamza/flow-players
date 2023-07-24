@@ -20,7 +20,7 @@ const Table = async ({
   return (
     <>
       <Toaster />
-      <div className="min-h-[70vh]">
+      <div className="mb-5">
         <div className="shadow-md sm:rounded-lg mt-10 max-w-2xl mx-auto ">
           {/* <pre>{JSON.stringify(players, null, 2)}</pre> */}
           <table className="w-full text-sm text-left text-gray-500 table-auto">

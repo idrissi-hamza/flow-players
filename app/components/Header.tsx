@@ -4,7 +4,7 @@ import { IoMdAdd } from 'react-icons/io';
 
 const Header = () => {
   return (
-    <header className="border-b  container w-full ">
+    <header className="border-b  w-full ">
       <div className="   w-full py-4 mx-auto flex justify-between items-center  max-w-2xl">
         <div className="font-bold">
           <Link href={'/'}>List des joueurs</Link>

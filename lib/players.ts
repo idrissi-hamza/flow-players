@@ -45,3 +45,50 @@ export const postPlayer = async (data: PlayerType) => {
     throw new Error(error.message);
   }
 };
+
+export const getPlayerById = async (playerId: string) => {
+  try {
+    const res = await fetch(`${BASE_URL}/api/players/${playerId}`, {
+      next: {
+        revalidate: 0,
+      },
+    });
+
+    if (!res.ok) {
+      throw new Error('Failed to get player by ID');
+    }
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error('Error:', error);
+    throw error;
+  }
+};
+
+export const updatePlayer = async ({
+  data,
+  id,
+}: {
+  data: PlayerType;
+  id: string;
+}) => {
+  try {
+    const res = await fetch(`http://localhost:3000/api/players/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!res.ok) {
+      throw new Error('Failed to update post.');
+    }
+
+    return res.json();
+  } catch (error) {
+    console.error('Error updating post:', error);
+    throw error;
+  }
+};

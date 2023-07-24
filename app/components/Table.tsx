@@ -1,6 +1,7 @@
 import { LIMIT } from '@/lib/constants';
 import { formatSalary } from '@/lib/formatSalary';
-import { PlayerType } from '@/lib/playerSchema';
+import { PlayerTypeWithId } from '@/lib/playerSchema';
+import Link from 'next/link';
 import React from 'react';
 import { BsFillPencilFill, BsTrash } from 'react-icons/bs';
 import { HiOutlineDocumentDuplicate } from 'react-icons/hi';
@@ -9,7 +10,7 @@ const Table = async ({
   players,
   page,
 }: {
-  players: PlayerType[];
+  players: PlayerTypeWithId[];
   page: number;
 }) => {
   const headers = ['Num', 'NOM COMPLET', 'SALAIRE ANNUEL', 'BUT', 'ACTIONS'];
@@ -50,15 +51,21 @@ const Table = async ({
                 </td>
                 <td className="px-6 py-4">{el.goal}</td>
                 <td className="px-6 py-4 flex gap-4 items-center">
-                  <div className="font-medium   hover:text-blue-600 cursor-pointer">
+                  {/* edit */}
+                  <Link
+                    href={`/edit/${el.id}`}
+                    className="font-medium   hover:text-blue-600 cursor-pointer"
+                  >
                     <BsFillPencilFill />
-                  </div>
-                  <div className="font-medium   hover:text-blue-600 cursor-pointer">
+                  </Link>
+                  {/* copy */}
+                  <button className="font-medium   hover:text-blue-600 cursor-pointer">
                     <HiOutlineDocumentDuplicate />
-                  </div>
-                  <div className="font-medium   hover:text-blue-600 cursor-pointer">
+                  </button>
+                  {/* delete */}
+                  <button className="font-medium   hover:text-blue-600 cursor-pointer">
                     <BsTrash />
-                  </div>
+                  </button>
                 </td>
               </tr>
             ))}

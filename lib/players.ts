@@ -3,8 +3,8 @@ import { PlayerType } from './playerSchema';
 import prisma from './prisma';
 
 export const getPlayers = async ({
-  page ,
-  limit ,
+  page,
+  limit,
 }: {
   page: number;
   limit: number;
@@ -31,13 +31,17 @@ export const postPlayer = async (data: PlayerType) => {
         'Content-Type': 'application/json',
       },
     });
-    // console.log(data)
+
+    if (res.status === 409) {
+      throw new Error('Player already exists');
+    }
+
     if (!res.ok) {
       throw new Error('Failed to post blog. Status: ' + res.status);
     }
 
-    return res.json();
+    return await res.json();
   } catch (error: any) {
-    throw new Error('Error posting blog: ' + error.message);
+    throw new Error(error.message);
   }
 };

@@ -46,7 +46,7 @@ const Table = async ({
                 </th>
                 <td className="px-6 py-4 ">{`${el.firstname} ${el.lastname}`}</td>
                 <td className="px-6 py-4">
-                  {formatSalary(el.salary, el.devise)}
+                  {el.salary && formatSalary(el.salary, el.devise)}
                 </td>
                 <td className="px-6 py-4">{el.goal}</td>
                 <td className="px-6 py-4 flex gap-4 items-center">

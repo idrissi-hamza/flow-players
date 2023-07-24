@@ -61,7 +61,6 @@ export const getPlayerById = async (playerId: string) => {
     const data = await res.json();
     return data;
   } catch (error) {
-    console.error('Error:', error);
     throw error;
   }
 };
@@ -74,7 +73,7 @@ export const updatePlayer = async ({
   id: string;
 }) => {
   try {
-    const res = await fetch(`http://localhost:3000/api/players/${id}`, {
+    const res = await fetch(`${BASE_URL}/api/players/${id}`, {
       method: 'PUT',
       body: JSON.stringify(data),
       headers: {
@@ -88,7 +87,22 @@ export const updatePlayer = async ({
 
     return res.json();
   } catch (error) {
-    console.error('Error updating post:', error);
+    throw error;
+  }
+};
+
+export const deletePlayer = async (id: string) => {
+  try {
+    const res = await fetch(`${BASE_URL}/api/players/${id}`, {
+      method: 'DELETE',
+    });
+
+    if (!res.ok) {
+      throw new Error('Failed to delete player.');
+    }
+    return;
+    // return res.json();
+  } catch (error) {
     throw error;
   }
 };

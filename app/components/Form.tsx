@@ -22,10 +22,14 @@ const Form = () => {
   const onSubmit: SubmitHandler<PlayerType> = async (data) => {
     toast.loading('Sending Request ', { id: '1' });
 
-    await postPlayer(data);
-    toast.success('player Posted Successfully', { id: '1' });
+    try {
+      await postPlayer(data);
+      toast.success('Player Posted Successfully', { id: '1' });
 
-    window.location.assign('/');
+      window.location.assign('/');
+    } catch (error: any) {
+      toast.error(` ${error.message} `, { id: '1' });
+    }
   };
 
   return (

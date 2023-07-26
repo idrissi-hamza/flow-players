@@ -8,7 +8,7 @@ import { Toaster, toast } from 'react-hot-toast';
 import { AiOutlineCloudDownload } from 'react-icons/ai';
 import Link from 'next/link';
 import { PlayerType, validationSchema } from '@/lib/playerSchema';
-import { postPlayer } from '@/lib/players';
+import { postPlayer } from '@/utils/postPlayer';
 
 const Form = () => {
   const {

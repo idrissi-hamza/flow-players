@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
-import { getPlayerById } from '@/lib/players';
 import EditForm from '@/app/components/EditForm';
+import { getPlayerById } from '@/utils/getPlayerById';
 
 const EditPage = async ({ params }: { params: { id: string } }) => {
   const player = await getPlayerById(params.id);

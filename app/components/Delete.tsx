@@ -1,6 +1,6 @@
 'use client';
 
-import { deletePlayer } from '@/lib/players';
+import { deletePlayer } from '@/utils/deletePlayer';
 import { revalidatePath } from 'next/cache';
 import React, { startTransition } from 'react';
 import toast from 'react-hot-toast';
@@ -25,6 +25,7 @@ const DeletePlayerButton = ({ id }: { id: string }) => {
 
   return (
     <button
+      aria-label="delete"
       className="font-medium   hover:text-blue-600 cursor-pointer"
       // onClick={() => startTransition(() => deletePlayerAction(id))}
       onClick={() => onDeleteHandler(id)}

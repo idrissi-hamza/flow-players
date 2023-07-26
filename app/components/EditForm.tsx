@@ -12,9 +12,9 @@ import {
   PlayerTypeWithId,
   validationSchema,
 } from '@/lib/playerSchema';
-import { updatePlayer } from '@/lib/players';
+
 import { useRouter } from 'next/navigation';
-import { revalidatePath } from 'next/cache';
+import { updatePlayer } from '@/utils/updatePlayerById';
 
 const EditForm = ({ player }: { player: PlayerTypeWithId }) => {
   const route = useRouter();

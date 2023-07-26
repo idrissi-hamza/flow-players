@@ -18,7 +18,7 @@ model Player {
   goal      Int?
   salary    Int?
   devise    String?
-  pictureURL String?
+  pictureURL String?   @db.Text
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   // Add a unique constraint to the combination of firstname and lastname

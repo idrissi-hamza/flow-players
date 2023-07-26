@@ -2,7 +2,6 @@
 
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
 import { Toaster, toast } from 'react-hot-toast';
 
 import { AiOutlineCloudDownload } from 'react-icons/ai';
@@ -41,9 +40,8 @@ const EditForm = ({ player }: { player: PlayerTypeWithId }) => {
 
       toast.success('Player Updated Successfully', { id: '1' });
 
-      route.push('/');
-      // revalidatePath("/");
-      // window.location.assign('/');
+     //it ensure the refetching of the new data 
+      window.location.assign('/');
     } catch (error: any) {
       toast.error(` ${error.message} `, { id: '1' });
     }

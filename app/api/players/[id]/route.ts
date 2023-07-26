@@ -76,6 +76,7 @@ export async function DELETE(
       where: { id },
     });
 
+    revalidatePath('/');
     return new NextResponse(
       `Player ${deletedPlayerName} has been deleted successfully`,
       { status: 200 }

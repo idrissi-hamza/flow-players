@@ -11,7 +11,7 @@ export const getPlayers = async ({
     `${BASE_URL}/api/players?page=${page}&limit=${limit}`,
     {
       next: {
-        revalidate: 0,
+        revalidate: 60,
       },
     }
   );

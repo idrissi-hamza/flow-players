@@ -1,10 +1,10 @@
-import { BASE_URL } from "@/lib/constants";
+import { BASE_URL } from '@/lib/constants';
 
 export const getPlayerById = async (playerId: string) => {
   try {
     const res = await fetch(`${BASE_URL}/api/players/${playerId}`, {
       next: {
-        revalidate: 0,
+        revalidate: 60,
       },
     });
 

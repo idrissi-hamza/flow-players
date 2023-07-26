@@ -1,4 +1,5 @@
 import prisma from '@/lib/prisma';
+import { revalidatePath } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
 
 // POST endpoint
@@ -28,6 +29,7 @@ export const POST = async (req: Request, res: NextResponse) => {
       data: { firstname, lastname, salary, goal, devise, pictureURL },
     });
 
+    revalidatePath('/');
     return NextResponse.json({ message: 'Success', player }, { status: 201 });
   } catch (err) {
     return NextResponse.json({ message: 'Error', err }, { status: 500 });
@@ -44,8 +46,8 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
   const parsedPage = parseInt(page || '', 10) || 1;
   const take = parseInt(limit || '', 10) || 10;
   const skip = (parsedPage - 1) * take;
-  
-// make it reusable for all and paginated result
+
+  // make it reusable for all and paginated result
   try {
     let players;
 

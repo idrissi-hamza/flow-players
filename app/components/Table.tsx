@@ -10,12 +10,14 @@ import { Toaster } from 'react-hot-toast';
 import CopyToClipboard from './CopyToClipboard';
 
 const Table = async ({
-  players,
+  promise,
   page,
 }: {
-  players: PlayerTypeWithId[];
+  promise: Promise<PlayerTypeWithId[]>;
   page: number;
 }) => {
+  const players = await promise;
+
   const headers = ['Num', 'NOM COMPLET', 'SALAIRE ANNUEL', 'BUT', 'ACTIONS'];
   return (
     <>
@@ -59,6 +61,7 @@ const Table = async ({
                   <td className="px-6 py-4 flex gap-4 items-center">
                     {/* edit */}
                     <Link
+                      aria-label="update player info"
                       href={`/edit/${player.id}`}
                       className="font-medium   hover:text-blue-600 cursor-pointer"
                     >

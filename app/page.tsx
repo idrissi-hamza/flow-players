@@ -1,10 +1,10 @@
 import Image from 'next/image';
 import Table from './components/Table';
 import Header from './components/Header';
-import { getPlayers } from '@/lib/players';
 import { Suspense } from 'react';
 import Pagination from './components/Pagination';
 import { LIMIT } from '@/lib/constants';
+import { getPlayers } from '@/utils/getAllPlayers';
 
 export default async function Home({
   searchParams,
@@ -17,7 +17,7 @@ export default async function Home({
   const limit =
     typeof searchParams.limit === 'string' ? Number(searchParams.limit) : LIMIT;
 
-  const { players } = await getPlayers({ page, limit });
+  const players = await getPlayers({ page, limit });
 
   return (
     <div className="flex flex-col min-h-screen ">
@@ -25,16 +25,14 @@ export default async function Home({
       <div className="flex flex-col justify-center items-center gap-4 ">
         <Suspense fallback={<div>...loading</div>}>
           <Table
-            players={players}
+            promise={players}
             page={page}
           />
         </Suspense>
-        <Suspense fallback={<div>...loading</div>}>
-          <Pagination
-            page={page}
-            total={players.length}
-          />
-        </Suspense>
+        <Pagination
+          page={page}
+          total={players.length}
+        />
       </div>
     </div>
   );

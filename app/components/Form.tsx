@@ -84,7 +84,6 @@ const Form = () => {
                 errors.salary && 'border-red-500'
               } rounded appearance-none focus:outline-none focus:shadow-outline`}
               id="salary"
-              type="number"
               placeholder="Salaire annuel"
               {...register('salary')}
             />
@@ -102,7 +101,7 @@ const Form = () => {
                 errors.goal && 'border-red-500'
               } rounded appearance-none focus:outline-none focus:shadow-outline`}
               id="goal"
-              type="number"
+             
               placeholder="Numero de but"
               {...register('goal')}
             />

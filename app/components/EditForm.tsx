@@ -13,32 +13,27 @@ import {
   validationSchema,
 } from '@/lib/playerSchema';
 import { updatePlayer } from '@/lib/players';
-
-type PlayerTypeFormData = {
-  firstname: string;
-  lastname: string;
-  goal: string;
-  salary: string;
-  devise: '€' | 'MAD' | '£' | '$' | 'Fr'; // Use the correct type for devise
-};
+import { useRouter } from 'next/navigation';
+import { revalidatePath } from 'next/cache';
 
 const EditForm = ({ player }: { player: PlayerTypeWithId }) => {
+  const route = useRouter();
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<PlayerTypeFormData>({
+  } = useForm<PlayerType>({
     resolver: zodResolver(validationSchema),
     defaultValues: {
-      firstname: player?.firstname || '',
-      lastname: player?.lastname || '',
-      goal: player?.goal?.toString() || '',
-      salary: player?.salary?.toString() || '',
-      devise: player?.devise || '€', // Set a default value for devise
+      firstname: player?.firstname,
+      lastname: player?.lastname,
+      goal: player?.goal,
+      salary: player?.salary,
+      devise: player?.devise,
     },
   });
 
-  const onSubmit: SubmitHandler<any> = async (data) => {
+  const onSubmit: SubmitHandler<PlayerType> = async (data) => {
     toast.loading('Sending Request ', { id: '1' });
 
     try {
@@ -46,7 +41,9 @@ const EditForm = ({ player }: { player: PlayerTypeWithId }) => {
 
       toast.success('Player Updated Successfully', { id: '1' });
 
-      window.location.assign('/');
+      route.push('/');
+      // revalidatePath("/");
+      // window.location.assign('/');
     } catch (error: any) {
       toast.error(` ${error.message} `, { id: '1' });
     }
@@ -104,7 +101,7 @@ const EditForm = ({ player }: { player: PlayerTypeWithId }) => {
                 errors.salary && 'border-red-500'
               } rounded appearance-none focus:outline-none focus:shadow-outline`}
               id="salary"
-              type="number"
+              // type="number"
               placeholder="Salaire annuel"
               {...register('salary')}
             />
@@ -122,7 +119,7 @@ const EditForm = ({ player }: { player: PlayerTypeWithId }) => {
                 errors.goal && 'border-red-500'
               } rounded appearance-none focus:outline-none focus:shadow-outline`}
               id="goal"
-              type="number"
+              // type="number"
               placeholder="Numero de but"
               {...register('goal')}
             />

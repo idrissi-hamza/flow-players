@@ -15,8 +15,7 @@ const CopyToClipboard = ({ player }: { player: PlayerType }) => {
 
   return (
     <button
-    aria-label="copy player data"
-     
+      aria-label="copy player data"
       className="font-medium   hover:text-blue-600 cursor-pointer"
       onClick={() => handleCopyToClipboard(player)}
     >

@@ -15,8 +15,6 @@ const EditPage = async ({ params }: { params: { id: string } }) => {
         Back
       </Link>
       <EditForm player={player} />
-      
-   
     </div>
   );
 };

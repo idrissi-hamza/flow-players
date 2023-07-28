@@ -7,7 +7,6 @@ export default function RootLayout({
 }) {
   return (
     <div>
-      {' '}
       <header className="border-b  w-full0 ">
         <div className="   w-full py-4 mx-auto flex justify-between items-center max-w-2xl ">
           <div className="font-bold">

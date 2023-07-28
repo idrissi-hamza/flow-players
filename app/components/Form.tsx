@@ -1,9 +1,8 @@
 'use client';
 
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-import { Toaster, toast } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 
 import { AiOutlineCloudDownload } from 'react-icons/ai';
 import Link from 'next/link';
@@ -19,25 +18,12 @@ const Form = () => {
     resolver: zodResolver(validationSchema),
   });
 
-  const onSubmit: SubmitHandler<PlayerType> = async (data) => {
-    toast.loading('Sending Request ', { id: '1' });
-
-    try {
-      await postPlayer(data);
-      toast.success('Player Posted Successfully', { id: '1' });
-
-      window.location.assign('/');
-    } catch (error: any) {
-      toast.error(` ${error.message} `, { id: '1' });
-    }
-  };
-
   return (
     <>
       <Toaster />
       <form
         className="px-8 pt-6 pb-4 mb-4 mt-6 border border-slate-400 rounded-md flex"
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit(postPlayer)}
       >
         <div className="w-1/3 flex items-center justify-center">
           <AiOutlineCloudDownload className="text-7xl text-slate-400" />
@@ -101,7 +87,6 @@ const Form = () => {
                 errors.goal && 'border-red-500'
               } rounded appearance-none focus:outline-none focus:shadow-outline`}
               id="goal"
-             
               placeholder="Numero de but"
               {...register('goal')}
             />

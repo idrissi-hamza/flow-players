@@ -23,6 +23,6 @@ export const updatePlayer = async ({
 
     return res.json();
   } catch (error) {
-    throw error;
+    throw error; 
   }
 };

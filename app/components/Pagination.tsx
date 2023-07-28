@@ -19,7 +19,7 @@ const Pagination = ({ page, total }: { page: number; total: number }) => {
         href={`?page=${total && page + 1}`}
         className={clsx(
           'rounded border bg-gray-100 px-3 py-1 text-sm text-gray-800',
-          total < LIMIT-1 && 'pointer-events-none opacity-50'
+          total < LIMIT - 1 && 'pointer-events-none opacity-50'
         )}
       >
         &gt;

@@ -9,6 +9,8 @@ import { getPlayers } from '@/utils/getAllPlayers';
 export default async function Home({
   searchParams,
 }: {
+  // Using [key: string]: string | string[] | undefined for searchParams allows handling multiple query parameters beyond page and limit. It's adaptable to any parameter type, be it a string, array of strings, or even undefined if absent in the URL. This flexibility enhances scalability and future-proofing, as the type doesn't need modification for new parameters.
+
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
   const page =

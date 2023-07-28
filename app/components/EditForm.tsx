@@ -1,8 +1,8 @@
 'use client';
 
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Toaster, toast } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 
 import { AiOutlineCloudDownload } from 'react-icons/ai';
 import Link from 'next/link';
@@ -12,11 +12,9 @@ import {
   validationSchema,
 } from '@/lib/playerSchema';
 
-import { useRouter } from 'next/navigation';
 import { updatePlayer } from '@/utils/updatePlayerById';
 
 const EditForm = ({ player }: { player: PlayerTypeWithId }) => {
-  const route = useRouter();
   const {
     register,
     handleSubmit,
@@ -32,29 +30,13 @@ const EditForm = ({ player }: { player: PlayerTypeWithId }) => {
     },
   });
 
-  const onSubmit: SubmitHandler<PlayerType> = async (data) => {
-    toast.loading('Sending Request ', { id: '1' });
-
-    try {
-      await updatePlayer({ data, id: player.id });
-
-      toast.success('Player Updated Successfully', { id: '1' });
-
-     //it ensure the refetching of the new data 
-      window.location.assign('/');
-    } catch (error: any) {
-      toast.error(` ${error.message} `, { id: '1' });
-    }
-  };
-
   return (
     <>
       <Toaster />
       <form
         className="px-8 pt-6 pb-4 mb-4 mt-6 border border-slate-400 rounded-md flex"
-
         // action
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit((data) => updatePlayer({ data, id: player.id }))}
       >
         <div className="w-1/3 flex items-center justify-center">
           <AiOutlineCloudDownload className="text-7xl text-slate-400" />

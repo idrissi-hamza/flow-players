@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 const Ajouter = () => {
   return (
-    <div className='mt-10 '>
+    <div className="mt-10 ">
       <Link
         className=" font-extrabold"
         href="/"
